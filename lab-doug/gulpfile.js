@@ -6,7 +6,7 @@ const eslint = require('gulp-eslint');
 
 gulp.task('test', function(){
   gulp.src('./test/*-test.js', {read: false})
-  .pipe(mocha({reporter: 'nyan'}));
+  .pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('lint', function(){
@@ -18,6 +18,9 @@ gulp.task('lint', function(){
 gulp.task('dev', ['lint', 'test'], function(){
 });
 
-gulp.task('watch', function(){
+gulp.task('dev', function(){
+  /*we exclude the node modules so we do not approach the 500 max files that gulp will watch*/
   gulp.watch(['**/*.js', '!node_modules/**'], ['lint', 'test']);
 });
+
+gulp.task('default', ['dev']);
